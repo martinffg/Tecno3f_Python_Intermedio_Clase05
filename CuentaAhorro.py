@@ -1,9 +1,9 @@
-import CuentaBancaria
+from CuentaBancaria import CuentaBancaria
 
 
 class CuentaAhorro(CuentaBancaria):
     def __init__(
-        self, nombre_titular, dni_titular, fecha_nacimiento, saldo=0, tasa_interes=0.001
+        self, nombre_titular, dni_titular, fecha_nacimiento, saldo, tasa_interes=0.001
     ):
         super().__init__(nombre_titular, dni_titular, fecha_nacimiento, saldo)
         self._tasa_interes = tasa_interes
@@ -44,5 +44,4 @@ class CuentaAhorro(CuentaBancaria):
             print("El monto de la tasa de interes debe ser mayor a 0")
 
     def calcular_interes_saldo(self):
-        saldo = super().obtener_saldo()
-        return saldo * self.obtener_tasa_interes()
+        return self._saldo * self.obtener_tasa_interes()

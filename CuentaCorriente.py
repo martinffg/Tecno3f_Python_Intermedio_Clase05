@@ -1,5 +1,4 @@
-import CuentaBancaria
-
+from CuentaBancaria import CuentaBancaria
 
 class CuentaCorriente(CuentaBancaria):
     def __init__(
