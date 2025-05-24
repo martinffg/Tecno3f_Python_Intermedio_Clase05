@@ -6,7 +6,8 @@ class CuentaAhorro(CuentaBancaria):
         self, nombre_titular, dni_titular, fecha_nacimiento, saldo, tasa_interes=0.001
     ):
         super().__init__(nombre_titular, dni_titular, fecha_nacimiento, saldo)
-        self._tasa_interes = tasa_interes
+        self._tasa_interes = (float)(tasa_interes)
+        self.set_tasa_interes(self._tasa_interes)
 
     def depositar(self, monto):
         if monto > 0:
@@ -21,7 +22,7 @@ class CuentaAhorro(CuentaBancaria):
         if monto <= self.obtener_saldo():
             self._saldo -= monto
             print(
-                f"Se ha extraido {monto} de la cuenta de {self._nombre_titular}, su saldo acutal es de: {self.obtener_saldo()}"
+                f"Se ha extraido {monto} de la Cuenta de Ahorro del Titular: {self._nombre_titular} y su saldo acutal es de: {self.obtener_saldo()}"
             )
         else:
             print("No posee saldo suficiente para esta operación")
@@ -29,19 +30,20 @@ class CuentaAhorro(CuentaBancaria):
     def obtener_tasa_interes(self):
         return self._tasa_interes
 
-    def set_tasa_interes(self, monto):
-        if monto > 0 and monto < 1:
-            self._tasa_interes = monto
+    def set_tasa_interes(self, montoInteres=0.001):
+        if montoInteres > 0 and montoInteres < 1:
+            self._tasa_interes = montoInteres
             print(
-                f"Se ha depositado {monto} a la Cuenta de Ahorro del Titular: {self._nombre_titular} y su saldo es de : {self.obtener_saldo()}"
+                f"Se definió la tasa de interes de: {montoInteres} a la Cuenta de Ahorro del Titular: {self._nombre_titular}"
             )
-        elif monto >= 1:
-            self._tasa_interes = monto / 100
+        elif montoInteres >= 1:
+            self._tasa_interes = montoInteres / 100
             print(
-                f"Se ha depositado {monto} a la Cuenta de Ahorro del Titular: {self._nombre_titular} y su saldo es de : {self.obtener_saldo()}"
+                f"Se definió la tasa de interes de: {montoInteres} a la Cuenta de Ahorro del Titular: {self._nombre_titular}"
             )
         else:
             print("El monto de la tasa de interes debe ser mayor a 0")
 
     def calcular_interes_saldo(self):
-        return self._saldo * self.obtener_tasa_interes()
+        interes = (float)(self.obtener_saldo() * self._tasa_interes)
+        return interes
